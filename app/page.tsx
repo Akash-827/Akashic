@@ -24,21 +24,21 @@ export default function Home() {
    <main className="relative flex flex-col justify-center items-center overflow-hidden mx-auto sm:px-10 px-5">
 
  {/* Starry background */}
- <div className="fixed inset-0 blur-[0.8px] w-full h-full starry-background z-[-20] pointer-events-none">
-        {stars.map((star, index) => (
-          <div
-            key={index}
-            className="star"
-            style={{
-              width: `${star.size}px`,
-              height: `${star.size}px`,
-              top: `${star.top}%`,
-              left: `${star.left}%`,
-              animationDelay: `${star.delay}s`,
-            }}
-          />
-        ))}
-      </div>
+ <div className="fixed inset-0 blur-[0.8px] w-full h-full starry-background z-[-20] pointer-events-none hidden sm:block">
+      {stars.map((star, index) => (
+        <div
+          key={index}
+          className="star"
+          style={{
+            width: `${star.size}px`,
+            height: `${star.size}px`,
+            top: `${star.top}%`,
+            left: `${star.left}%`,
+            animationDelay: `${star.delay}s`,
+          }}
+        />
+      ))}
+    </div>
 
     <Header />
     <Hero />
