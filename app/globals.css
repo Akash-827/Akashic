@@ -9,7 +9,7 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
+    --background: #000000;
     --foreground: #ededed;
   }
 }
@@ -19,3 +19,260 @@ body {
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+@layer base {
+  .nav-item {
+    @apply px-4 py-1.5 transition duration-200 cursor-pointer hover:scale-110 ; /* Smooth transition for hover effects */
+    
+    /* Ensure no background color */
+    background-color: transparent;
+
+    /* Display inline-block to allow scaling */
+    display: inline-block;
+
+    /* Positioning to allow scaling effect */
+    position: relative; 
+  }
+
+  .nav-text {
+    transition: transform 0.2s ease, text-shadow 0.2s ease; /* Transition for text */
+  }
+
+  /* Text glow effect on hover */
+  .nav-item:hover .nav-text {
+    text-shadow: 0 0 16px #00A8FF, 0 0 16px #00A8FF; /* Glow effect */
+     /* Adjust scale factor */
+  }
+}
+
+
+
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 20s linear infinite; /* Infinite spinning */
+}
+
+.social-icon {
+  transition: box-shadow 0.1s ease-in-out;
+}
+
+.social-icon:hover {
+  box-shadow: 0 0 10px 5px rgba(0, 170, 255, 0.5); /* White glow */
+  
+}
+
+/* Customize colors for each icon if needed */
+.instagram-icon:hover {
+  box-shadow: 0 0 10px 5px rgba(225, 48, 108, 0.5); /* Instagram color */
+}
+
+.behance-icon:hover {
+  box-shadow: 0 0 10px 5px rgba(23, 119, 255, 0.5); /* Behance color */
+}
+
+.linkedin-icon:hover {
+  box-shadow: 0 0 10px 5px rgba(0, 119, 181, 0.5); /* LinkedIn color */
+}
+
+.dribbble-icon:hover {
+  box-shadow: 0 0 10px 5px rgba(233, 78, 119, 0.5); /* Dribbble color */
+}
+
+/* Global CSS - Starry background */
+@keyframes twinkle {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.starry-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: -1;
+}
+
+.star {
+  position: absolute;
+  background-color: white;
+  border-radius: 50%;
+  opacity: 0.8;
+  animation: twinkle 2s infinite ease-in-out;
+}
+
+/* Randomly position stars */
+.star:nth-child(1) { width: 2px; height: 2px; top: 10%; left: 20%; animation-delay: 0s; }
+.star:nth-child(2) { width: 1px; height: 1px; top: 30%; left: 40%; animation-delay: 1s; }
+.star:nth-child(3) { width: 1.5px; height: 1.5px; top: 20%; left: 70%; animation-delay: 1.5s; }
+/* Add more nth-childs for more stars at different positions */
+.star:nth-child(20) { width: 1px; height: 1px; top: 90%; left: 10%; animation-delay: 2s; }
+
+
+
+
+.lighten {
+  filter: brightness(1.5); /* Adjust the value to lighten the image */
+}
+
+.tilt {
+  transition: transform 0.2s ease; /* Smooth transition for the tilt effect */
+  will-change: transform; /* Optimizes the animation performance */
+}
+
+.tilt:hover {
+  transform: perspective(500px) rotateY(10deg) rotateX(10deg); /* Adjust angles as needed */
+}
+
+
+@keyframes glow {
+  0% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+}
+
+.glow-animation {
+  animation: glow 1.5s infinite;
+}
+
+
+@keyframes tilt {
+  0%, 100% { transform: rotate(2deg); }
+  50% { transform: rotate(-2deg); }
+}
+
+.animate-tilt2 {
+  animation: tilt 3s ease-in-out infinite;
+}
+
+@keyframes continuous360Tilt {
+  0% {
+    transform: perspective(1000px) rotateX(0deg) rotateY(0deg);
+  }
+  25% {
+    transform: perspective(1000px) rotateX(10deg) rotateY(10deg);
+  }
+  50% {
+    transform: perspective(1000px) rotateX(0deg) rotateY(20deg);
+  }
+  75% {
+    transform: perspective(1000px) rotateX(-10deg) rotateY(10deg);
+  }
+  100% {
+    transform: perspective(1000px) rotateX(0deg) rotateY(0deg);
+  }
+}
+
+.animate-tilt {
+  animation: continuous360Tilt 8s linear infinite;
+}
+
+
+
+/* Global styles for the sliding animation */
+/* Media query for small screens */
+@media (max-width: 440px) {
+  .navbar {
+    position: fixed;
+    top: 50px; /* You can adjust this to control where the navbar initially appears */
+    left: 50%;
+    transform: translateX(-50%) translateY(-20px); /* Initially off-screen */
+    transition: transform 0.3s ease-in-out; /* Smooth sliding animation */
+    z-index: 50;
+  }
+
+  /* When the navbar is open, it slides to its normal position */
+  .navbar-open {
+    transform: translateX(-50%) translateY(0); /* Fully visible */
+  }
+
+  /* When the navbar is closed, it slightly shifts up */
+  .navbar-closed {
+    transform: translateX(-50%) translateY(-20px); /* Slightly off-screen */
+  }
+}
+
+/* Targeting the element with ID 'custom-element' at min-height of 1200px */
+@media (min-height: 1200px) {
+  #work {
+    /* Example of changing position using transform */
+    
+
+    /* Or use absolute positioning */
+    position: absolute; /* if not already positioned */
+    top: 1000px;
+    left: 0px;
+  }
+}
+
+
+
+@media (min-width: 1200px) {
+  #overlay {
+    /* Example of changing position using transform */
+    
+
+    /* Or use absolute positioning */
+    position: absolute; /* if not already positioned */
+    bottom:-100%;
+    left: 0px;
+  }
+}
+
+@media (min-width: 1200px) {
+  #overlay {
+    /* Example of changing position using transform */
+    
+
+    /* Or use absolute positioning */
+    position: absolute; /* if not already positioned */
+    bottom:-100%;
+    left: 0px;
+  }
+}
+
+
+/* For screens between 768px and 1200px */
+@media (min-width: 768px) and (max-width: 912px) {
+  #circle {
+    position: absolute;
+    bottom: 200px;
+    left: 250px;
+    /* Additional styles specific to this size range */
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

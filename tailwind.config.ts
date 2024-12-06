@@ -5,15 +5,37 @@ const config: Config = {
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./sections/**/*.{js,ts,jsx,tsx,mdx}"
   ],
   theme: {
-    extend: {
-      colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+
+    screens: {
+    sm: "440px",
+    md: "768px",
+    lg: "1200px"
+    },
+
+    container: {
+      center: true,
+      padding: {
+        default: "1rem",
+        md: "2rem"
       },
     },
+  
+    extend: {
+      fontFamily: {
+        sans: 'var(--font-sans)',
+        serif: 'var(--font-serif)',
+      }
+    },
+
   },
-  plugins: [],
+
+ 
+
+  plugins: [
+    require('@tailwindcss/aspect-ratio'),
+  ],
 };
 export default config;
