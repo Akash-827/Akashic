@@ -42,7 +42,7 @@ const About = () => {
 <div className="absolute inset-0 w-full bg-gradient-to-r from-white/50 rounded-2xl"/>
 <div className="p-4 w-full  bg-black/90 rounded-2xl  relative group transition duration-200">
 <p className="font-semibold">Delhi Technological University</p>
-<p className="font-light">Sofware Engineer</p>
+<p className="font-light">Software Engineer</p>
 </div>
 </div>
 
