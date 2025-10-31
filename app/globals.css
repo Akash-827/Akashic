@@ -264,6 +264,10 @@ body {
   }
 }
 
+.starry-background {
+  display: none !important;
+}
+
 
 
 
