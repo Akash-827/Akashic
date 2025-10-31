@@ -2,50 +2,61 @@
 @tailwind components;
 @tailwind utilities;
 
+/* -------------------------------------------------
+   🌙 Global Theme Setup — Prevent white background flash
+-------------------------------------------------- */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Default: dark theme */
+  --background: #000000;
+  --foreground: #ffffff;
+  color-scheme: dark;
 }
 
-@media (prefers-color-scheme: dark) {
+/* Optional: enable light mode if system prefers */
+@media (prefers-color-scheme: light) {
   :root {
-    --background: #000000;
-    --foreground: #ededed;
+    --background: #ffffff;
+    --foreground: #000000;
+    color-scheme: light;
   }
+}
+
+/* Fallbacks */
+html {
+  background-color: #000; /* avoids white flash before CSS loads */
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
+  background-color: var(--background, #000);
+  color: var(--foreground, #fff);
   font-family: Arial, Helvetica, sans-serif;
 }
 
+/* -------------------------------------------------
+   🧭 Base Layer (Tailwind customizations)
+-------------------------------------------------- */
+
 @layer base {
   .nav-item {
-    @apply px-4 py-1.5 transition duration-200 cursor-pointer hover:scale-110 ; /* Smooth transition for hover effects */
-    
-    /* Ensure no background color */
+    @apply px-4 py-1.5 transition duration-200 cursor-pointer hover:scale-110;
     background-color: transparent;
-
-    /* Display inline-block to allow scaling */
     display: inline-block;
-
-    /* Positioning to allow scaling effect */
-    position: relative; 
+    position: relative;
   }
 
   .nav-text {
-    transition: transform 0.2s ease, text-shadow 0.2s ease; /* Transition for text */
+    transition: transform 0.2s ease, text-shadow 0.2s ease;
   }
 
-  /* Text glow effect on hover */
   .nav-item:hover .nav-text {
-    text-shadow: 0 0 16px #00A8FF, 0 0 16px #00A8FF; /* Glow effect */
-     /* Adjust scale factor */
+    text-shadow: 0 0 16px #00A8FF, 0 0 16px #00A8FF;
   }
 }
 
-
+/* -------------------------------------------------
+   ✨ Animations and Effects
+-------------------------------------------------- */
 
 @keyframes spin-slow {
   from {
@@ -57,7 +68,7 @@ body {
 }
 
 .animate-spin-slow {
-  animation: spin-slow 20s linear infinite; /* Infinite spinning */
+  animation: spin-slow 20s linear infinite;
 }
 
 .social-icon {
@@ -65,28 +76,30 @@ body {
 }
 
 .social-icon:hover {
-  box-shadow: 0 0 10px 5px rgba(0, 170, 255, 0.5); /* White glow */
-  
+  box-shadow: 0 0 10px 5px rgba(0, 170, 255, 0.5);
 }
 
-/* Customize colors for each icon if needed */
+/* Social Media Hover Colors */
 .instagram-icon:hover {
-  box-shadow: 0 0 10px 5px rgba(225, 48, 108, 0.5); /* Instagram color */
+  box-shadow: 0 0 10px 5px rgba(225, 48, 108, 0.5);
 }
 
 .behance-icon:hover {
-  box-shadow: 0 0 10px 5px rgba(23, 119, 255, 0.5); /* Behance color */
+  box-shadow: 0 0 10px 5px rgba(23, 119, 255, 0.5);
 }
 
 .linkedin-icon:hover {
-  box-shadow: 0 0 10px 5px rgba(0, 119, 181, 0.5); /* LinkedIn color */
+  box-shadow: 0 0 10px 5px rgba(0, 119, 181, 0.5);
 }
 
 .dribbble-icon:hover {
-  box-shadow: 0 0 10px 5px rgba(233, 78, 119, 0.5); /* Dribbble color */
+  box-shadow: 0 0 10px 5px rgba(233, 78, 119, 0.5);
 }
 
-/* Global CSS - Starry background */
+/* -------------------------------------------------
+   🌌 Starry Background (disabled by default)
+-------------------------------------------------- */
+
 @keyframes twinkle {
   0%, 100% {
     opacity: 1;
@@ -104,6 +117,7 @@ body {
   height: 100%;
   overflow: hidden;
   z-index: -1;
+  display: none !important; /* disabled as per your setup */
 }
 
 .star {
@@ -114,29 +128,28 @@ body {
   animation: twinkle 2s infinite ease-in-out;
 }
 
-/* Randomly position stars */
+/* Example Stars */
 .star:nth-child(1) { width: 2px; height: 2px; top: 10%; left: 20%; animation-delay: 0s; }
 .star:nth-child(2) { width: 1px; height: 1px; top: 30%; left: 40%; animation-delay: 1s; }
 .star:nth-child(3) { width: 1.5px; height: 1.5px; top: 20%; left: 70%; animation-delay: 1.5s; }
-/* Add more nth-childs for more stars at different positions */
 .star:nth-child(20) { width: 1px; height: 1px; top: 90%; left: 10%; animation-delay: 2s; }
 
-
-
+/* -------------------------------------------------
+   🌟 Hover & Animation Effects
+-------------------------------------------------- */
 
 .lighten {
-  filter: brightness(1.5); /* Adjust the value to lighten the image */
+  filter: brightness(1.5);
 }
 
 .tilt {
-  transition: transform 0.2s ease; /* Smooth transition for the tilt effect */
-  will-change: transform; /* Optimizes the animation performance */
+  transition: transform 0.2s ease;
+  will-change: transform;
 }
 
 .tilt:hover {
-  transform: perspective(500px) rotateY(10deg) rotateX(10deg); /* Adjust angles as needed */
+  transform: perspective(500px) rotateY(10deg) rotateX(10deg);
 }
-
 
 @keyframes glow {
   0% {
@@ -156,7 +169,6 @@ body {
 .glow-animation {
   animation: glow 1.5s infinite;
 }
-
 
 @keyframes tilt {
   0%, 100% { transform: rotate(2deg); }
@@ -189,93 +201,54 @@ body {
   animation: continuous360Tilt 8s linear infinite;
 }
 
+/* -------------------------------------------------
+   📱 Responsive Navbar Animation
+-------------------------------------------------- */
 
-
-/* Global styles for the sliding animation */
-/* Media query for small screens */
 @media (max-width: 440px) {
   .navbar {
     position: fixed;
-    top: 50px; /* You can adjust this to control where the navbar initially appears */
+    top: 50px;
     left: 50%;
-    transform: translateX(-50%) translateY(-20px); /* Initially off-screen */
-    transition: transform 0.3s ease-in-out; /* Smooth sliding animation */
+    transform: translateX(-50%) translateY(-20px);
+    transition: transform 0.3s ease-in-out;
     z-index: 50;
   }
 
-  /* When the navbar is open, it slides to its normal position */
   .navbar-open {
-    transform: translateX(-50%) translateY(0); /* Fully visible */
+    transform: translateX(-50%) translateY(0);
   }
 
-  /* When the navbar is closed, it slightly shifts up */
   .navbar-closed {
-    transform: translateX(-50%) translateY(-20px); /* Slightly off-screen */
+    transform: translateX(-50%) translateY(-20px);
   }
 }
 
-/* Targeting the element with ID 'custom-element' at min-height of 1200px */
+/* -------------------------------------------------
+   🖥️ Responsive Positioning for Work/Overlay Sections
+-------------------------------------------------- */
+
 @media (min-height: 1200px) {
   #work {
-    /* Example of changing position using transform */
-    
-
-    /* Or use absolute positioning */
-    position: absolute; /* if not already positioned */
+    position: absolute;
     top: 1000px;
     left: 0px;
   }
 }
 
-
-
 @media (min-width: 1200px) {
   #overlay {
-    /* Example of changing position using transform */
-    
-
-    /* Or use absolute positioning */
-    position: absolute; /* if not already positioned */
-    bottom:-100%;
+    position: absolute;
+    bottom: -100%;
     left: 0px;
   }
 }
 
-@media (min-width: 1200px) {
-  #overlay {
-    /* Example of changing position using transform */
-    
-
-    /* Or use absolute positioning */
-    position: absolute; /* if not already positioned */
-    bottom:-100%;
-    left: 0px;
-  }
-}
-
-
-/* For screens between 768px and 1200px */
+/* For tablets */
 @media (min-width: 768px) and (max-width: 912px) {
   #circle {
     position: absolute;
     bottom: 200px;
     left: 250px;
-    /* Additional styles specific to this size range */
   }
 }
-
-.starry-background {
-  display: none !important;
-}
-
-
-
-
-
-
-
-
-
-
-
-
